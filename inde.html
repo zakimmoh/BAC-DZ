@@ -1,0 +1,3010 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BAC DZ — منصة البكالوريا</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:"Cairo",sans-serif;
+    background:#050505;
+    color:#fff;
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.gold{
+    color:#d4af37;
+}
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+#authPage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+
+    background:
+    radial-gradient(circle at 20% 20%,rgba(212,175,55,.15),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(212,175,55,.08),transparent 30%),
+    #050505;
+}
+
+.auth-box{
+    width:100%;
+    max-width:460px;
+    background:rgba(15,15,15,.95);
+    border:1px solid rgba(212,175,55,.25);
+    border-radius:28px;
+    padding:38px;
+    box-shadow:0 30px 100px rgba(0,0,0,.7);
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo-icon{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    background:linear-gradient(135deg,#d4af37,#8d681c);
+    color:#050505;
+    box-shadow:0 15px 40px rgba(212,175,55,.2);
+}
+
+.logo h1{
+    font-family:"Playfair Display",serif;
+    margin-top:14px;
+    font-size:30px;
+}
+
+.logo p{
+    color:#888;
+    font-size:13px;
+}
+
+.auth-tabs{
+    display:flex;
+    background:#0b0b0b;
+    border-radius:14px;
+    padding:5px;
+    margin-bottom:25px;
+}
+
+.auth-tabs button{
+    flex:1;
+    border:0;
+    background:transparent;
+    color:#888;
+    padding:12px;
+    border-radius:10px;
+}
+
+.auth-tabs button.active{
+    background:#d4af37;
+    color:#050505;
+    font-weight:800;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+.input-group label{
+    display:block;
+    color:#aaa;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.input-group input,
+.input-group select{
+    width:100%;
+    padding:14px 15px;
+    background:#090909;
+    border:1px solid #252525;
+    color:#fff;
+    border-radius:12px;
+    outline:none;
+}
+
+.input-group input:focus,
+.input-group select:focus{
+    border-color:#d4af37;
+}
+
+.main-btn{
+    width:100%;
+    border:0;
+    padding:15px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#d4af37,#a77d20);
+    color:#050505;
+    font-weight:900;
+    font-size:15px;
+    margin-top:8px;
+}
+
+.error{
+    color:#ff6b6b;
+    font-size:13px;
+    margin:10px 0;
+}
+
+.success{
+    color:#66d98a;
+    font-size:13px;
+    margin:10px 0;
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+#app{
+    min-height:100vh;
+}
+
+.sidebar{
+    position:fixed;
+    right:0;
+    top:0;
+    width:270px;
+    height:100vh;
+    background:#090909;
+    border-left:1px solid #1e1e1e;
+    padding:25px 18px;
+    z-index:50;
+}
+
+.side-logo{
+    padding:10px 12px 25px;
+    border-bottom:1px solid #1c1c1c;
+    margin-bottom:20px;
+}
+
+.side-logo strong{
+    font-family:"Playfair Display",serif;
+    font-size:24px;
+}
+
+.side-logo span{
+    display:block;
+    color:#777;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.nav button{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#aaa;
+    text-align:right;
+    padding:13px 15px;
+    border-radius:12px;
+    transition:.25s;
+}
+
+.nav button:hover{
+    background:#151515;
+    color:#fff;
+}
+
+.nav button.active{
+    background:rgba(212,175,55,.13);
+    color:#d4af37;
+}
+
+.logout{
+    position:absolute;
+    bottom:20px;
+    right:18px;
+    left:18px;
+    border:1px solid #252525;
+    background:#101010;
+    color:#aaa;
+    padding:12px;
+    border-radius:12px;
+}
+
+.main{
+    margin-right:270px;
+    padding:35px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.user-badge{
+    color:#aaa;
+    font-size:13px;
+}
+
+.user-badge strong{
+    color:#d4af37;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    padding:40px;
+    border-radius:25px;
+    background:
+    radial-gradient(circle at 10% 10%,rgba(212,175,55,.14),transparent 35%),
+    linear-gradient(135deg,#111,#070707);
+    border:1px solid rgba(212,175,55,.2);
+    margin-bottom:25px;
+}
+
+.hero small{
+    color:#d4af37;
+    letter-spacing:2px;
+}
+
+.hero h2{
+    font-size:34px;
+    margin:8px 0;
+}
+
+.hero p{
+    color:#999;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:#0d0d0d;
+    border:1px solid #1d1d1d;
+    border-radius:20px;
+    padding:22px;
+}
+
+.card h3{
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#888;
+    font-size:13px;
+}
+
+
+/* =====================================================
+   PAYWALL
+===================================================== */
+
+.paywall{
+    min-height:65vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.paywall-box{
+    max-width:850px;
+    width:100%;
+    text-align:center;
+    background:
+    radial-gradient(circle at 50% 0%,rgba(212,175,55,.14),transparent 45%),
+    #0c0c0c;
+    border:1px solid rgba(212,175,55,.25);
+    border-radius:28px;
+    padding:45px 30px;
+}
+
+.lock-icon{
+    width:80px;
+    height:80px;
+    border-radius:25px;
+    margin:0 auto 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+    background:rgba(212,175,55,.1);
+    border:1px solid rgba(212,175,55,.3);
+}
+
+.paywall-box h2{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.paywall-box > p{
+    color:#888;
+    margin-bottom:30px;
+}
+
+
+/* =====================================================
+   PLANS
+===================================================== */
+
+.plans{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:20px;
+}
+
+.plan{
+    background:#111;
+    border:1px solid #252525;
+    border-radius:22px;
+    padding:25px;
+    text-align:right;
+    position:relative;
+}
+
+.plan.featured{
+    border-color:#d4af37;
+    box-shadow:0 15px 50px rgba(212,175,55,.1);
+}
+
+.plan-badge{
+    position:absolute;
+    left:15px;
+    top:15px;
+    font-size:10px;
+    background:#d4af37;
+    color:#050505;
+    padding:5px 9px;
+    border-radius:20px;
+    font-weight:900;
+}
+
+.plan h3{
+    color:#d4af37;
+    margin-bottom:10px;
+}
+
+.price{
+    font-size:32px;
+    font-weight:900;
+}
+
+.duration{
+    color:#777;
+    font-size:12px;
+    margin-bottom:20px;
+}
+
+.plan ul{
+    list-style:none;
+    color:#aaa;
+    font-size:13px;
+    line-height:2;
+    margin-bottom:20px;
+}
+
+.plan li::before{
+    content:"✓";
+    color:#d4af37;
+    margin-left:7px;
+}
+
+
+/* =====================================================
+   PAYMENT
+===================================================== */
+
+.payment-box{
+    max-width:650px;
+    margin:auto;
+    background:#0d0d0d;
+    border:1px solid #222;
+    border-radius:25px;
+    padding:30px;
+}
+
+.payment-methods{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:20px 0;
+}
+
+.payment-method{
+    border:1px solid #292929;
+    background:#111;
+    color:#aaa;
+    padding:18px;
+    border-radius:15px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.payment-method.active{
+    border-color:#d4af37;
+    color:#d4af37;
+    background:rgba(212,175,55,.08);
+}
+
+.payment-method strong{
+    display:block;
+    color:#fff;
+    margin-top:5px;
+}
+
+.ccp-info{
+    background:#151515;
+    border:1px solid #252525;
+    padding:18px;
+    border-radius:15px;
+    margin:15px 0;
+    color:#aaa;
+    font-size:13px;
+    line-height:1.9;
+}
+
+.ccp-info strong{
+    color:#d4af37;
+}
+
+.file-input{
+    width:100%;
+    padding:14px;
+    background:#090909;
+    border:1px dashed #444;
+    border-radius:12px;
+    color:#aaa;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.section{
+    display:none;
+}
+
+.section.active{
+    display:block;
+}
+
+.section-title{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.locked-content{
+    position:relative;
+}
+
+.locked-content:after{
+    content:"🔒 المحتوى متاح للمشتركين فقط";
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(5,5,5,.94);
+    border-radius:25px;
+    color:#d4af37;
+    font-size:20px;
+    font-weight:900;
+}
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+.admin-table th,
+.admin-table td{
+    padding:13px;
+    border-bottom:1px solid #222;
+    text-align:right;
+    font-size:13px;
+}
+
+.admin-table th{
+    color:#d4af37;
+}
+
+.status{
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:11px;
+}
+
+.status.pending{
+    background:rgba(212,175,55,.12);
+    color:#d4af37;
+}
+
+.status.active{
+    background:rgba(70,200,110,.12);
+    color:#5fd681;
+}
+
+.status.rejected{
+    background:rgba(255,80,80,.12);
+    color:#ff7070;
+}
+
+.admin-btn{
+    border:0;
+    border-radius:8px;
+    padding:7px 10px;
+    font-size:11px;
+    margin:2px;
+}
+
+.approve{
+    background:#4dbd70;
+    color:#050505;
+}
+
+.reject{
+    background:#b84949;
+    color:#fff;
+}
+
+.delete{
+    background:#333;
+    color:#fff;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+.mobile-menu{
+    display:none;
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        display:none;
+    }
+
+    .main{
+        margin-right:0;
+        padding:18px;
+    }
+
+    .mobile-menu{
+        display:block;
+        margin-bottom:15px;
+    }
+
+    .mobile-menu button{
+        border:1px solid #292929;
+        background:#111;
+        color:#d4af37;
+        padding:10px 15px;
+        border-radius:10px;
+    }
+
+    .plans{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding:25px;
+    }
+
+    .hero h2{
+        font-size:25px;
+    }
+
+    .payment-methods{
+        grid-template-columns:1fr;
+    }
+
+    .admin-table{
+        display:block;
+        overflow-x:auto;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     AUTH PAGE
+===================================================== -->
+
+<div id="authPage">
+
+    <div class="auth-box">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🎓
+            </div>
+
+            <h1>
+                BAC <span class="gold">DZ</span>
+            </h1>
+
+            <p>
+                منصتك الذكية للتحضير للبكالوريا
+            </p>
+
+        </div>
+
+
+        <div class="auth-tabs">
+
+            <button
+                id="loginTab"
+                class="active"
+                onclick="showAuth('login')">
+                تسجيل الدخول
+            </button>
+
+            <button
+                id="registerTab"
+                onclick="showAuth('register')">
+                إنشاء حساب
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <form id="loginForm">
+
+            <div class="input-group">
+
+                <label>
+                    البريد الإلكتروني
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    required
+                    placeholder="example@email.com">
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    كلمة المرور
+                </label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    required
+                    placeholder="••••••••">
+
+            </div>
+
+            <div id="loginMessage"></div>
+
+            <button class="main-btn">
+                دخول إلى المنصة
+            </button>
+
+        </form>
+
+
+        <!-- REGISTER -->
+
+        <form
+            id="registerForm"
+            class="hidden">
+
+            <div class="input-group">
+
+                <label>
+                    الاسم
+                </label>
+
+                <input
+                    type="text"
+                    id="registerName"
+                    required
+                    placeholder="اسمك">
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    البريد الإلكتروني
+                </label>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    required
+                    placeholder="example@email.com">
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    كلمة المرور
+                </label>
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    required
+                    minlength="6"
+                    placeholder="6 أحرف على الأقل">
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    الشعبة
+                </label>
+
+                <select id="registerBranch" required>
+
+                    <option value="">
+                        اختر الشعبة
+                    </option>
+
+                    <option>
+                        علوم تجريبية
+                    </option>
+
+                    <option>
+                        رياضيات
+                    </option>
+
+                    <option>
+                        تقني رياضي
+                    </option>
+
+                    <option>
+                        تسيير واقتصاد
+                    </option>
+
+                    <option>
+                        آداب وفلسفة
+                    </option>
+
+                    <option>
+                        لغات أجنبية
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="registerMessage"></div>
+
+            <button class="main-btn">
+                إنشاء الحساب
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     APP
+===================================================== -->
+
+<div id="app" class="hidden">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="side-logo">
+
+            <strong>
+                BAC <span class="gold">DZ</span>
+            </strong>
+
+            <span>
+                منصة البكالوريا الجزائرية
+            </span>
+
+        </div>
+
+
+        <nav class="nav">
+
+            <button
+                class="active"
+                onclick="openSection('home',this)">
+                🏠 الرئيسية
+            </button>
+
+            <button
+                onclick="openSection('subjects',this)">
+                📚 البرنامج الدراسي
+            </button>
+
+            <button
+                onclick="openSection('schedule',this)">
+                📅 برنامجي
+            </button>
+
+            <button
+                onclick="openSection('average',this)">
+                🧮 حساب المعدل
+            </button>
+
+            <button
+                onclick="openSection('subscription',this)">
+                💎 الاشتراك
+            </button>
+
+            <button
+                id="adminNav"
+                class="hidden"
+                onclick="openSection('admin',this)">
+                ⚙️ لوحة الإدارة
+            </button>
+
+        </nav>
+
+
+        <button
+            class="logout"
+            onclick="logout()">
+            🚪 تسجيل الخروج
+        </button>
+
+    </aside>
+
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="mobile-menu">
+
+            <button onclick="toggleMobileNav()">
+                ☰ القائمة
+            </button>
+
+        </div>
+
+
+        <div class="topbar">
+
+            <div>
+                <div class="user-badge">
+                    مرحبًا،
+                    <strong id="currentUserName">
+                    </strong>
+                </div>
+
+                <div
+                    id="subscriptionStatus"
+                    class="user-badge">
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             HOME
+        ================================================= -->
+
+        <section
+            id="home"
+            class="section active">
+
+            <div class="hero">
+
+                <small>
+                    BAC DZ • 2026 / 2027
+                </small>
+
+                <h2>
+                    مستقبلك يبدأ من هنا
+                </h2>
+
+                <p>
+                    برنامجك الدراسي، دروسك، متابعة تقدمك
+                    وحساب معدلك في منصة واحدة.
+                </p>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>📚 البرنامج</h3>
+
+                    <p>
+                        وحدات ودروس المواد الدراسية
+                        الخاصة بالبكالوريا.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>🎥 الفيديوهات</h3>
+
+                    <p>
+                        روابط شروحات تعليمية للدروس.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>📊 تقدمك</h3>
+
+                    <p>
+                        تابع الدروس التي أنهيتها.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>🎯 المعدل</h3>
+
+                    <p>
+                        احسب معدلك التقريبي للبكالوريا.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SUBJECTS
+        ================================================= -->
+
+        <section
+            id="subjects"
+            class="section">
+
+            <h2 class="section-title">
+                📚 البرنامج الدراسي
+            </h2>
+
+            <div id="subscriptionGateSubjects">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCHEDULE
+        ================================================= -->
+
+        <section
+            id="schedule"
+            class="section">
+
+            <h2 class="section-title">
+                📅 برنامجي الدراسي
+            </h2>
+
+            <div
+                id="scheduleGate">
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AVERAGE
+        ================================================= -->
+
+        <section
+            id="average"
+            class="section">
+
+            <h2 class="section-title">
+                🧮 حساب المعدل
+            </h2>
+
+            <div
+                id="averageGate">
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SUBSCRIPTION
+        ================================================= -->
+
+        <section
+            id="subscription"
+            class="section">
+
+            <div class="paywall">
+
+                <div class="paywall-box">
+
+                    <div class="lock-icon">
+                        💎
+                    </div>
+
+                    <h2>
+                        اختر اشتراكك
+                    </h2>
+
+                    <p>
+                        افتح جميع البرامج والدروس
+                        والفيديوهات والميزات الخاصة.
+                    </p>
+
+
+                    <div class="plans">
+
+
+                        <!-- WEEK -->
+
+                        <div class="plan">
+
+                            <h3>
+                                الاشتراك الأسبوعي
+                            </h3>
+
+                            <div class="price">
+                                6,000 دج
+                            </div>
+
+                            <div class="duration">
+                                لمدة 7 أيام
+                            </div>
+
+                            <ul>
+
+                                <li>
+                                    جميع البرامج
+                                </li>
+
+                                <li>
+                                    جميع الدروس
+                                </li>
+
+                                <li>
+                                    فيديوهات الشرح
+                                </li>
+
+                                <li>
+                                    متابعة التقدم
+                                </li>
+
+                            </ul>
+
+                            <button
+                                class="main-btn"
+                                onclick="choosePlan('weekly')">
+                                اشترك أسبوعيًا
+                            </button>
+
+                        </div>
+
+
+
+                        <!-- MONTH -->
+
+                        <div class="plan featured">
+
+                            <div class="plan-badge">
+                                الأفضل
+                            </div>
+
+                            <h3>
+                                الاشتراك الشهري
+                            </h3>
+
+                            <div class="price">
+                                25,000 دج
+                            </div>
+
+                            <div class="duration">
+                                لمدة 30 يومًا
+                            </div>
+
+                            <ul>
+
+                                <li>
+                                    جميع البرامج
+                                </li>
+
+                                <li>
+                                    جميع الدروس
+                                </li>
+
+                                <li>
+                                    فيديوهات الشرح
+                                </li>
+
+                                <li>
+                                    متابعة التقدم
+                                </li>
+
+                            </ul>
+
+                            <button
+                                class="main-btn"
+                                onclick="choosePlan('monthly')">
+                                اشترك شهريًا
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAYMENT
+        ================================================= -->
+
+        <section
+            id="payment"
+            class="section">
+
+            <h2 class="section-title">
+                💳 إتمام الاشتراك
+            </h2>
+
+            <div class="payment-box">
+
+                <div class="card">
+
+                    <p>
+                        الخطة المختارة:
+                    </p>
+
+                    <h3
+                        id="selectedPlan">
+                    </h3>
+
+                </div>
+
+
+                <div class="payment-methods">
+
+                    <div
+                        class="payment-method active"
+                        onclick="selectPayment('card',this)">
+
+                        💳
+
+                        <strong>
+                            Visa / CIB
+                        </strong>
+
+                        دفع بالبطاقة
+
+                    </div>
+
+
+                    <div
+                        class="payment-method"
+                        onclick="selectPayment('ccp',this)">
+
+                        🏦
+
+                        <strong>
+                            CCP
+                        </strong>
+
+                        تحويل بريدي
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARD -->
+
+                <div id="cardPayment">
+
+                    <div class="ccp-info">
+
+                        <strong>
+                            الدفع عبر Visa / CIB
+                        </strong>
+
+                        <br>
+
+                        سيتم توجيهك إلى بوابة الدفع
+                        الخاصة بالموقع عند ربط
+                        بوابة الدفع الحقيقية.
+
+                    </div>
+
+                    <button
+                        class="main-btn"
+                        onclick="startCardPayment()">
+
+                        💳 متابعة الدفع
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- CCP -->
+
+                <div
+                    id="ccpPayment"
+                    class="hidden">
+
+                    <div class="ccp-info">
+
+                        <strong>
+                            طريقة الدفع عبر CCP
+                        </strong>
+
+                        <br>
+
+                        قم بتحويل مبلغ الاشتراك إلى
+                        حساب CCP الخاص بك.
+
+                        <br><br>
+
+                        <strong>
+                            رقم CCP:
+                        </strong>
+
+                        <span id="ccpNumber">
+                            ضع رقم CCP هنا
+                        </span>
+
+                        <br>
+
+                        <strong>
+                            اسم صاحب الحساب:
+                        </strong>
+
+                        <span>
+                            ضع الاسم هنا
+                        </span>
+
+                        <br><br>
+
+                        بعد التحويل، ارفع صورة وصل
+                        التحويل وسيتم مراجعته من الإدارة.
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>
+                            صورة وصل التحويل
+                        </label>
+
+                        <input
+                            class="file-input"
+                            type="file"
+                            id="receipt"
+                            accept="image/*">
+
+                    </div>
+
+
+                    <div id="ccpMessage"></div>
+
+
+                    <button
+                        class="main-btn"
+                        onclick="submitCCP()">
+
+                        📤 إرسال الوصل للإدارة
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ADMIN
+        ================================================= -->
+
+        <section
+            id="admin"
+            class="section">
+
+            <h2 class="section-title">
+                ⚙️ لوحة الإدارة
+            </h2>
+
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <p>
+                        المستخدمون
+                    </p>
+
+                    <h2 id="adminUsers">
+                        0
+                    </h2>
+
+                </div>
+
+
+                <div class="card">
+
+                    <p>
+                        اشتراكات فعالة
+                    </p>
+
+                    <h2 id="adminActive">
+                        0
+                    </h2>
+
+                </div>
+
+
+                <div class="card">
+
+                    <p>
+                        طلبات CCP
+                    </p>
+
+                    <h2 id="adminPending">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="card" style="margin-top:20px">
+
+                <h3>
+                    طلبات الدفع عبر CCP
+                </h3>
+
+                <div id="adminRequests">
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   DATABASE — DEMO
+===================================================== */
+
+const USERS_KEY = "bacdz_users_v1";
+const REQUESTS_KEY = "bacdz_payment_requests_v1";
+const CURRENT_KEY = "bacdz_current_user";
+
+
+function getUsers(){
+
+    return JSON.parse(
+        localStorage.getItem(USERS_KEY) || "[]"
+    );
+
+}
+
+
+function saveUsers(users){
+
+    localStorage.setItem(
+        USERS_KEY,
+        JSON.stringify(users)
+    );
+
+}
+
+
+function getRequests(){
+
+    return JSON.parse(
+        localStorage.getItem(REQUESTS_KEY) || "[]"
+    );
+
+}
+
+
+function saveRequests(requests){
+
+    localStorage.setItem(
+        REQUESTS_KEY,
+        JSON.stringify(requests)
+    );
+
+}
+
+
+function getCurrentUser(){
+
+    const email =
+        localStorage.getItem(CURRENT_KEY);
+
+    if(!email) return null;
+
+    return getUsers().find(
+        u => u.email === email
+    );
+
+}
+
+
+/* =====================================================
+   AUTH TABS
+===================================================== */
+
+function showAuth(type){
+
+    const login =
+        document.getElementById("loginForm");
+
+    const register =
+        document.getElementById("registerForm");
+
+    const loginTab =
+        document.getElementById("loginTab");
+
+    const registerTab =
+        document.getElementById("registerTab");
+
+
+    if(type === "login"){
+
+        login.classList.remove("hidden");
+        register.classList.add("hidden");
+
+        loginTab.classList.add("active");
+        registerTab.classList.remove("active");
+
+    }else{
+
+        login.classList.add("hidden");
+        register.classList.remove("hidden");
+
+        loginTab.classList.remove("active");
+        registerTab.classList.add("active");
+
+    }
+
+}
+
+
+/* =====================================================
+   REGISTER
+===================================================== */
+
+document
+.getElementById("registerForm")
+.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+
+    const name =
+        document.getElementById(
+            "registerName"
+        ).value.trim();
+
+
+    const email =
+        document.getElementById(
+            "registerEmail"
+        ).value.trim().toLowerCase();
+
+
+    const password =
+        document.getElementById(
+            "registerPassword"
+        ).value;
+
+
+    const branch =
+        document.getElementById(
+            "registerBranch"
+        ).value;
+
+
+    const users = getUsers();
+
+
+    if(users.some(u => u.email === email)){
+
+        showMessage(
+            "registerMessage",
+            "هذا البريد مسجل مسبقًا.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const user = {
+
+        id:
+            Date.now(),
+
+        name,
+
+        email,
+
+        password,
+
+        branch,
+
+        subscription:{
+            status:"inactive",
+            plan:null,
+            expiresAt:null
+        },
+
+        createdAt:
+            Date.now()
+
+    };
+
+
+    users.push(user);
+
+    saveUsers(users);
+
+
+    showMessage(
+        "registerMessage",
+        "تم إنشاء الحساب بنجاح. يمكنك تسجيل الدخول الآن.",
+        "success"
+    );
+
+
+    setTimeout(
+        () => showAuth("login"),
+        1000
+    );
+
+});
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+document
+.getElementById("loginForm")
+.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+
+    const email =
+        document.getElementById(
+            "loginEmail"
+        ).value.trim().toLowerCase();
+
+
+    const password =
+        document.getElementById(
+            "loginPassword"
+        ).value;
+
+
+    const user =
+        getUsers().find(
+            u =>
+                u.email === email &&
+                u.password === password
+        );
+
+
+    if(!user){
+
+        showMessage(
+            "loginMessage",
+            "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        CURRENT_KEY,
+        user.email
+    );
+
+
+    loadApp();
+
+});
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(id,text,type){
+
+    document.getElementById(id).innerHTML =
+        `<div class="${type}">
+            ${text}
+        </div>`;
+
+}
+
+
+/* =====================================================
+   LOAD APP
+===================================================== */
+
+function loadApp(){
+
+    const user =
+        getCurrentUser();
+
+    if(!user) return;
+
+
+    document
+    .getElementById("authPage")
+    .classList.add("hidden");
+
+
+    document
+    .getElementById("app")
+    .classList.remove("hidden");
+
+
+    document
+    .getElementById("currentUserName")
+    .textContent =
+        user.name;
+
+
+    updateSubscription();
+
+
+    renderSubjects();
+
+
+    if(user.email === "admin@bacdz.com"){
+
+        document
+        .getElementById("adminNav")
+        .classList.remove("hidden");
+
+        renderAdmin();
+
+    }
+
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    localStorage.removeItem(
+        CURRENT_KEY
+    );
+
+    location.reload();
+
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+function openSection(id,button){
+
+    document
+    .querySelectorAll(".section")
+    .forEach(
+        s => s.classList.remove("active")
+    );
+
+
+    const target =
+        document.getElementById(id);
+
+    if(target){
+
+        target.classList.add("active");
+
+    }
+
+
+    document
+    .querySelectorAll(".nav button")
+    .forEach(
+        b => b.classList.remove("active")
+    );
+
+
+    if(button){
+
+        button.classList.add("active");
+
+    }
+
+
+    if(id === "admin"){
+
+        renderAdmin();
+
+    }
+
+}
+
+
+/* =====================================================
+   SUBSCRIPTION CHECK
+===================================================== */
+
+function hasActiveSubscription(){
+
+    const user =
+        getCurrentUser();
+
+    if(!user) return false;
+
+
+    if(
+        user.subscription &&
+        user.subscription.status === "active" &&
+        user.subscription.expiresAt > Date.now()
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        user.subscription &&
+        user.subscription.expiresAt &&
+        user.subscription.expiresAt <= Date.now()
+    ){
+
+        user.subscription.status =
+            "expired";
+
+        updateUser(user);
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =====================================================
+   UPDATE USER
+===================================================== */
+
+function updateUser(updated){
+
+    const users =
+        getUsers();
+
+    const index =
+        users.findIndex(
+            u => u.email === updated.email
+        );
+
+    if(index !== -1){
+
+        users[index] = updated;
+
+        saveUsers(users);
+
+    }
+
+}
+
+
+/* =====================================================
+   SUBSCRIPTION STATUS
+===================================================== */
+
+function updateSubscription(){
+
+    const user =
+        getCurrentUser();
+
+    if(!user) return;
+
+
+    const el =
+        document.getElementById(
+            "subscriptionStatus"
+        );
+
+
+    if(hasActiveSubscription()){
+
+        const date =
+            new Date(
+                user.subscription.expiresAt
+            );
+
+        el.innerHTML =
+            `💎 اشتراك فعال — ينتهي ${date.toLocaleDateString("ar-DZ")}`;
+
+    }else{
+
+        el.innerHTML =
+            `🔒 لا يوجد اشتراك فعال`;
+
+    }
+
+}
+
+
+/* =====================================================
+   SUBJECT PROGRAMS
+===================================================== */
+
+const programs = {
+
+"رياضيات":[
+
+"الدوال العددية",
+"النهايات والاستمرارية",
+"الاشتقاق",
+"الدوال الأصلية والتكامل",
+"المتتاليات العددية",
+"الأعداد المركبة",
+"الاحتمالات",
+"الهندسة في الفضاء"
+
+],
+
+"علوم الطبيعة":[
+
+"التخصص الوظيفي للبروتينات",
+"تحويل الطاقة",
+"التواصل العصبي",
+"التنظيم الهرموني",
+"المناعة",
+"الوراثة"
+
+],
+
+"الفيزياء":[
+
+"المتابعة الزمنية لتحول كيميائي",
+"التحولات النووية",
+"الظواهر الكهربائية",
+"الميكانيك",
+"الأحماض والأسس",
+"الأسترة"
+
+],
+
+"اللغة العربية":[
+
+"النصوص الأدبية",
+"النحو والصرف",
+"البلاغة",
+"العروض",
+"منهجية الإجابة"
+
+],
+
+"الفلسفة":[
+
+"المشكلة والإشكالية",
+"الحرية",
+"الحقيقة",
+"اللغة والفكر",
+"الأخلاق",
+"منهجية المقال الفلسفي"
+
+],
+
+"التاريخ والجغرافيا":[
+
+"تطور العالم في ظل الثنائية القطبية",
+"الجزائر 1945–1989",
+"العالم الثالث",
+"القوى الاقتصادية الكبرى",
+"الجزائر والتنمية"
+
+],
+
+"التربية الإسلامية":[
+
+"القرآن الكريم",
+"الحديث الشريف",
+"العقيدة",
+"الفقه"
+
+],
+
+"الفرنسية":[
+
+"Compréhension de l'écrit",
+"Grammaire",
+"Production écrite"
+
+],
+
+"الإنجليزية":[
+
+"Reading Comprehension",
+"Grammar",
+"Writing"
+
+],
+
+"التكنولوجيا":[
+
+"الهندسة الكهربائية",
+"الأنظمة الآلية",
+"الهندسة الميكانيكية"
+
+],
+
+"الاقتصاد والمناجمنت":[
+
+"السوق",
+"المؤسسة",
+"الإنتاج",
+"التكاليف",
+"التنظيم",
+"اتخاذ القرار"
+
+],
+
+"التسيير المحاسبي والمالي":[
+
+"مبادئ المحاسبة",
+"التسجيل المحاسبي",
+"التسويات",
+"الميزانية",
+"التحليل المالي"
+
+]
+
+};
+
+
+/* =====================================================
+   SUBJECT RENDER
+===================================================== */
+
+function renderSubjects(){
+
+    const box =
+        document.getElementById(
+            "subscriptionGateSubjects"
+        );
+
+
+    if(!hasActiveSubscription()){
+
+        box.innerHTML = `
+
+            <div class="paywall">
+
+                <div class="paywall-box">
+
+                    <div class="lock-icon">
+                        🔒
+                    </div>
+
+                    <h2>
+                        المحتوى مقفل
+                    </h2>
+
+                    <p>
+                        يجب تفعيل اشتراك للوصول
+                        إلى البرنامج الدراسي والدروس.
+                    </p>
+
+                    <button
+                        class="main-btn"
+                        onclick="openSection('subscription')">
+
+                        💎 عرض الاشتراكات
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <div class="cards">
+
+    `;
+
+
+    Object.entries(programs)
+    .forEach(([subject,lessons])=>{
+
+        html += `
+
+            <div class="card">
+
+                <h3>
+                    📚 ${subject}
+                </h3>
+
+                <p>
+                    ${lessons.length}
+                    دروس ووحدات
+                </p>
+
+                <div style="margin-top:15px">
+
+        `;
+
+
+        lessons.forEach(
+            (lesson,index)=>{
+
+                html += `
+
+                    <div style="
+                        padding:10px;
+                        margin-top:7px;
+                        background:#151515;
+                        border-radius:10px;
+                        font-size:13px;
+                        display:flex;
+                        justify-content:space-between;
+                        gap:8px;
+                    ">
+
+                        <span>
+                            ${index+1}.
+                            ${lesson}
+                        </span>
+
+                        <a
+                            href="https://www.youtube.com/results?search_query=${encodeURIComponent("بكالوريا الجزائر "+subject+" "+lesson)}"
+                            target="_blank"
+                            style="
+                                color:#d4af37;
+                                text-decoration:none;
+                                white-space:nowrap;
+                            ">
+                            ▶
+                        </a>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+        html += `
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `</div>`;
+
+
+    box.innerHTML = html;
+
+}
+
+
+/* =====================================================
+   CHOOSE PLAN
+===================================================== */
+
+let selectedPlanType = null;
+let selectedPaymentMethod = "card";
+
+
+function choosePlan(plan){
+
+    selectedPlanType =
+        plan;
+
+
+    const name =
+        plan === "weekly"
+        ? "6,000 دج — أسبوعي"
+        : "25,000 دج — شهري";
+
+
+    document.getElementById(
+        "selectedPlan"
+    ).textContent =
+        name;
+
+
+    openSection("payment");
+
+}
+
+
+/* =====================================================
+   PAYMENT METHOD
+===================================================== */
+
+function selectPayment(type,element){
+
+    selectedPaymentMethod =
+        type;
+
+
+    document
+    .querySelectorAll(".payment-method")
+    .forEach(
+        x => x.classList.remove("active")
+    );
+
+
+    element.classList.add("active");
+
+
+    document
+    .getElementById("cardPayment")
+    .classList.toggle(
+        "hidden",
+        type !== "card"
+    );
+
+
+    document
+    .getElementById("ccpPayment")
+    .classList.toggle(
+        "hidden",
+        type !== "ccp"
+    );
+
+}
+
+
+/* =====================================================
+   CARD PAYMENT
+===================================================== */
+
+function startCardPayment(){
+
+    alert(
+        "هذه نسخة تجريبية. يجب ربط هذا الزر ببوابة دفع CIB/Visa معتمدة قبل استقبال الأموال."
+    );
+
+}
+
+
+/* =====================================================
+   CCP REQUEST
+===================================================== */
+
+function submitCCP(){
+
+    const file =
+        document.getElementById(
+            "receipt"
+        ).files[0];
+
+
+    if(!file){
+
+        showMessage(
+            "ccpMessage",
+            "يرجى رفع صورة وصل التحويل.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const user =
+        getCurrentUser();
+
+
+    /*
+       تحويل الصورة إلى Base64 للتجربة فقط.
+       لا تستخدم هذه الطريقة في الإنتاج.
+    */
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload = function(){
+
+        const requests =
+            getRequests();
+
+
+        requests.push({
+
+            id:
+                Date.now(),
+
+            userEmail:
+                user.email,
+
+            userName:
+                user.name,
+
+            plan:
+                selectedPlanType,
+
+            amount:
+                selectedPlanType === "weekly"
+                ? 6000
+                : 25000,
+
+            receipt:
+                reader.result,
+
+            status:
+                "pending",
+
+            createdAt:
+                Date.now()
+
+        });
+
+
+        saveRequests(requests);
+
+
+        showMessage(
+            "ccpMessage",
+            "تم إرسال الوصل بنجاح. انتظر موافقة الإدارة.",
+            "success"
+        );
+
+
+        document.getElementById(
+            "receipt"
+        ).value = "";
+
+
+        renderAdmin();
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+function renderAdmin(){
+
+    const admin =
+        getCurrentUser();
+
+
+    if(!admin) return;
+
+
+    if(admin.email !== "admin@bacdz.com"){
+
+        return;
+
+    }
+
+
+    const users =
+        getUsers();
+
+
+    const requests =
+        getRequests();
+
+
+    document.getElementById(
+        "adminUsers"
+    ).textContent =
+        users.length;
+
+
+    document.getElementById(
+        "adminActive"
+    ).textContent =
+        users.filter(
+            u => hasSubscriptionForUser(u)
+        ).length;
+
+
+    document.getElementById(
+        "adminPending"
+    ).textContent =
+        requests.filter(
+            r => r.status === "pending"
+        ).length;
+
+
+    const box =
+        document.getElementById(
+            "adminRequests"
+        );
+
+
+    if(!requests.length){
+
+        box.innerHTML =
+            `<p style="color:#777;margin-top:15px">
+                لا توجد طلبات دفع حاليًا.
+            </p>`;
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <div style="overflow:auto">
+
+        <table class="admin-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        الطالب
+                    </th>
+
+                    <th>
+                        الخطة
+                    </th>
+
+                    <th>
+                        المبلغ
+                    </th>
+
+                    <th>
+                        الحالة
+                    </th>
+
+                    <th>
+                        الوصل
+                    </th>
+
+                    <th>
+                        الإجراء
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    requests
+    .slice()
+    .reverse()
+    .forEach(request=>{
+
+        html += `
+
+            <tr>
+
+                <td>
+                    ${request.userName}
+                    <br>
+                    <small style="color:#666">
+                        ${request.userEmail}
+                    </small>
+                </td>
+
+                <td>
+                    ${
+                        request.plan === "weekly"
+                        ? "أسبوعي"
+                        : "شهري"
+                    }
+                </td>
+
+                <td>
+                    ${request.amount.toLocaleString("ar-DZ")}
+                    دج
+                </td>
+
+                <td>
+
+                    <span class="status ${request.status}">
+                        ${
+                            request.status === "pending"
+                            ? "قيد المراجعة"
+                            : request.status === "active"
+                            ? "مقبول"
+                            : "مرفوض"
+                        }
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="admin-btn"
+                        onclick="viewReceipt(${request.id})">
+
+                        👁 عرض
+
+                    </button>
+
+                </td>
+
+                <td>
+
+                    ${
+                        request.status === "pending"
+                        ? `
+
+                            <button
+                                class="admin-btn approve"
+                                onclick="approveRequest(${request.id})">
+
+                                ✓ قبول
+
+                            </button>
+
+                            <button
+                                class="admin-btn reject"
+                                onclick="rejectRequest(${request.id})">
+
+                                ✕ رفض
+
+                            </button>
+
+                        `
+                        :
+                        `
+
+                            <button
+                                class="admin-btn delete"
+                                onclick="deleteRequest(${request.id})">
+
+                                حذف
+
+                            </button>
+
+                        `
+                    }
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+
+        </div>
+
+    `;
+
+
+    box.innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+   USER SUBSCRIPTION CHECK
+===================================================== */
+
+function hasSubscriptionForUser(user){
+
+    return (
+        user.subscription &&
+        user.subscription.status === "active" &&
+        user.subscription.expiresAt > Date.now()
+    );
+
+}
+
+
+/* =====================================================
+   APPROVE
+===================================================== */
+
+function approveRequest(id){
+
+    const requests =
+        getRequests();
+
+
+    const request =
+        requests.find(
+            r => r.id === id
+        );
+
+
+    if(!request) return;
+
+
+    const users =
+        getUsers();
+
+
+    const user =
+        users.find(
+            u =>
+                u.email ===
+                request.userEmail
+        );
+
+
+    if(!user) return;
+
+
+    const days =
+        request.plan === "weekly"
+        ? 7
+        : 30;
+
+
+    /*
+       يبدأ الاشتراك من الآن.
+    */
+
+    user.subscription = {
+
+        status:
+            "active",
+
+        plan:
+            request.plan,
+
+        expiresAt:
+            Date.now() +
+            days *
+            24 *
+            60 *
+            60 *
+            1000
+
+    };
+
+
+    saveUsers(users);
+
+
+    request.status =
+        "active";
+
+
+    request.approvedAt =
+        Date.now();
+
+
+    saveRequests(requests);
+
+
+    renderAdmin();
+
+
+    updateSubscription();
+
+
+    renderSubjects();
+
+
+    alert(
+        "تم قبول الدفع وتفعيل الاشتراك لمدة "
+        + days +
+        " أيام."
+    );
+
+}
+
+
+/* =====================================================
+   REJECT
+===================================================== */
+
+function rejectRequest(id){
+
+    const requests =
+        getRequests();
+
+
+    const request =
+        requests.find(
+            r => r.id === id
+        );
+
+
+    if(!request) return;
+
+
+    request.status =
+        "rejected";
+
+
+    request.rejectedAt =
+        Date.now();
+
+
+    saveRequests(requests);
+
+
+    renderAdmin();
+
+}
+
+
+/* =====================================================
+   DELETE REQUEST
+===================================================== */
+
+function deleteRequest(id){
+
+    const requests =
+        getRequests()
+        .filter(
+            r => r.id !== id
+        );
+
+
+    saveRequests(
+        requests
+    );
+
+
+    renderAdmin();
+
+}
+
+
+/* =====================================================
+   VIEW RECEIPT
+===================================================== */
+
+function viewReceipt(id){
+
+    const request =
+        getRequests().find(
+            r => r.id === id
+        );
+
+
+    if(!request) return;
+
+
+    const win =
+        window.open();
+
+
+    win.document.write(`
+
+        <html dir="rtl">
+
+        <head>
+
+            <title>
+                وصل الدفع
+            </title>
+
+            <style>
+
+                body{
+                    background:#050505;
+                    color:white;
+                    font-family:Arial;
+                    text-align:center;
+                    padding:30px;
+                }
+
+                img{
+                    max-width:95%;
+                    max-height:90vh;
+                    border-radius:15px;
+                }
+
+            </style>
+
+        </head>
+
+        <body>
+
+            <h2>
+                وصل دفع ${request.userName}
+            </h2>
+
+            <img
+                src="${request.receipt}">
+
+        </body>
+
+        </html>
+
+    `);
+
+}
+
+
+/* =====================================================
+   MOBILE NAV
+===================================================== */
+
+function toggleMobileNav(){
+
+    const sidebar =
+        document.querySelector(
+            ".sidebar"
+        );
+
+
+    if(
+        sidebar.style.display ===
+        "block"
+    ){
+
+        sidebar.style.display =
+            "none";
+
+    }else{
+
+        sidebar.style.display =
+            "block";
+
+    }
+
+}
+
+
+/* =====================================================
+   DEMO ADMIN ACCOUNT
+===================================================== */
+
+/*
+   حساب الإدارة التجريبي:
+
+   Email:
+   admin@bacdz.com
+
+   Password:
+   Admin123
+
+*/
+
+function createAdmin(){
+
+    const users =
+        getUsers();
+
+
+    if(
+        !users.some(
+            u =>
+                u.email ===
+                "admin@bacdz.com"
+        )
+    ){
+
+        users.push({
+
+            id:999999,
+
+            name:"Administrator",
+
+            email:"admin@bacdz.com",
+
+            password:"Admin123",
+
+            branch:"",
+
+            subscription:{
+                status:"active",
+                plan:"admin",
+                expiresAt:
+                    Date.now() +
+                    3650 *
+                    24 *
+                    60 *
+                    60 *
+                    1000
+            },
+
+            createdAt:
+                Date.now()
+
+        });
+
+
+        saveUsers(users);
+
+    }
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+createAdmin();
+
+
+if(
+    localStorage.getItem(
+        CURRENT_KEY
+    )
+){
+
+    loadApp();
+
+}
+
+</script>
+
+</body>
+</html>
