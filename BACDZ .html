@@ -1,0 +1,2563 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAC ELITE DZ | منصة البكالوريا الجزائرية</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+--gold:#d8b45a;
+--gold2:#f5df9a;
+--gold3:#a77b24;
+--bg:#050505;
+--card:#101010;
+--card2:#151515;
+--line:rgba(216,180,90,.18);
+--text:#f5f5f5;
+--muted:#888;
+--green:#52d98a;
+--red:#ff6868;
+--blue:#72a7ff;
+}
+
+body{
+background:
+radial-gradient(circle at 10% 0%,rgba(216,180,90,.12),transparent 28%),
+radial-gradient(circle at 90% 100%,rgba(216,180,90,.07),transparent 30%),
+#050505;
+color:var(--text);
+font-family:Cairo,sans-serif;
+min-height:100vh;
+}
+
+*{scrollbar-width:thin;scrollbar-color:var(--gold) #111}
+
+button,input,select,textarea{font-family:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+/* AUTH */
+
+#auth{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.auth-container{
+width:100%;
+max-width:470px;
+background:rgba(13,13,13,.95);
+border:1px solid var(--line);
+border-radius:30px;
+padding:35px;
+box-shadow:0 30px 100px #000;
+}
+
+.brand{text-align:center;margin-bottom:28px}
+
+.brand-logo{
+width:78px;height:78px;margin:auto;
+border-radius:24px;
+display:flex;align-items:center;justify-content:center;
+font-size:35px;
+background:linear-gradient(145deg,var(--gold2),var(--gold3));
+color:#080808;
+}
+
+.brand h1{
+font-family:"Playfair Display",serif;
+color:var(--gold2);
+font-size:29px;
+margin-top:14px;
+}
+
+.brand p{font-size:12px;color:var(--muted)}
+
+.auth-tabs{
+display:flex;
+gap:5px;
+padding:5px;
+background:#070707;
+border-radius:14px;
+margin-bottom:23px;
+}
+
+.auth-tabs button{
+flex:1;border:0;padding:12px;
+background:transparent;color:#777;border-radius:10px;
+}
+
+.auth-tabs button.active{
+background:linear-gradient(135deg,var(--gold2),var(--gold));
+color:#111;font-weight:800;
+}
+
+.field{margin-bottom:16px}
+
+.field label{
+display:block;
+font-size:12px;
+color:#aaa;
+margin-bottom:7px;
+}
+
+input,select,textarea{
+width:100%;
+background:#080808;
+border:1px solid #282828;
+color:white;
+padding:13px 14px;
+border-radius:12px;
+outline:none;
+}
+
+input:focus,select:focus,textarea:focus{
+border-color:var(--gold);
+box-shadow:0 0 0 3px rgba(216,180,90,.07);
+}
+
+.gold-btn{
+width:100%;
+border:0;
+padding:14px;
+border-radius:12px;
+background:linear-gradient(135deg,var(--gold2),var(--gold3));
+color:#090909;
+font-weight:900;
+}
+
+.auth-note{
+text-align:center;
+color:#555;
+font-size:10px;
+margin-top:15px;
+}
+
+/* APP */
+
+#app{display:none}
+
+.sidebar{
+position:fixed;
+top:0;
+right:0;
+width:275px;
+height:100vh;
+background:rgba(7,7,7,.98);
+border-left:1px solid var(--line);
+padding:25px 18px;
+z-index:1000;
+}
+
+.side-brand{
+padding:5px 10px 22px;
+border-bottom:1px solid #1c1c1c;
+margin-bottom:20px;
+}
+
+.side-brand strong{
+font-family:"Playfair Display",serif;
+color:var(--gold2);
+font-size:22px;
+}
+
+.side-brand span{
+display:block;color:#666;font-size:10px;
+}
+
+.nav{
+display:flex;
+flex-direction:column;
+gap:5px;
+}
+
+.nav button{
+border:0;
+background:transparent;
+color:#888;
+padding:12px 14px;
+border-radius:12px;
+text-align:right;
+}
+
+.nav button:hover,
+.nav button.active{
+background:rgba(216,180,90,.09);
+color:var(--gold2);
+}
+
+.logout{
+position:absolute;
+bottom:22px;
+right:18px;
+left:18px;
+padding:12px;
+background:#101010;
+color:#999;
+border:1px solid #292929;
+border-radius:11px;
+}
+
+.main{
+margin-right:275px;
+padding:28px;
+min-height:100vh;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.top-title h2{font-size:25px}
+.top-title p{font-size:11px;color:#666}
+
+.user-box{display:flex;align-items:center;gap:12px}
+
+.avatar{
+width:45px;height:45px;border-radius:50%;
+background:linear-gradient(145deg,var(--gold2),var(--gold3));
+color:#111;
+display:flex;align-items:center;justify-content:center;
+font-weight:900;
+}
+
+.mobile-menu{
+display:none;
+border:1px solid #292929;
+background:#111;
+color:var(--gold2);
+border-radius:10px;
+padding:9px 12px;
+}
+
+/* GENERAL */
+
+.section{display:none}
+.section.active{display:block;animation:appear .35s ease}
+
+.hero{
+border-radius:27px;
+border:1px solid var(--line);
+padding:34px;
+position:relative;
+overflow:hidden;
+background:
+linear-gradient(135deg,rgba(216,180,90,.13),rgba(10,10,10,.85)),
+#101010;
+margin-bottom:20px;
+}
+
+.hero h1{font-size:31px;margin:8px 0}
+.hero p{color:#999;max-width:800px;line-height:2;font-size:13px}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-bottom:24px;
+}
+
+.stat{
+background:#101010;
+border:1px solid #202020;
+border-radius:18px;
+padding:18px;
+}
+
+.stat small{color:#666;font-size:10px}
+.stat strong{
+display:block;
+margin-top:5px;
+font-size:24px;
+color:var(--gold2);
+}
+
+.section-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
+}
+
+.section-head h2{font-size:21px}
+.section-head p{color:#666;font-size:11px}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.card{
+background:linear-gradient(145deg,#121212,#0b0b0b);
+border:1px solid #202020;
+border-radius:19px;
+padding:20px;
+transition:.25s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+border-color:rgba(216,180,90,.35);
+}
+
+.card h3{font-size:16px;margin-bottom:6px}
+.card p{font-size:11px;color:#777;line-height:1.9}
+
+.icon{
+width:45px;height:45px;
+display:flex;align-items:center;justify-content:center;
+border-radius:13px;
+background:#1a1a1a;
+font-size:22px;
+margin-bottom:13px;
+}
+
+/* SUBJECTS + TEACHERS */
+
+.subject-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.subject{
+background:#101010;
+border:1px solid #222;
+border-radius:18px;
+padding:18px;
+}
+
+.subject-top{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.subject-icon{
+width:48px;height:48px;
+border-radius:14px;
+background:#191919;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+}
+
+.subject small{
+display:inline-block;
+color:#777;
+background:#191919;
+padding:3px 7px;
+border-radius:6px;
+font-size:9px;
+margin-top:3px;
+}
+
+.teacher{
+margin-top:15px;
+padding-top:13px;
+border-top:1px solid #222;
+}
+
+.teacher-title{
+color:var(--gold2);
+font-size:11px;
+margin-bottom:8px;
+font-weight:800;
+}
+
+.teacher-name{
+display:inline-block;
+background:#191919;
+border:1px solid #292929;
+padding:6px 9px;
+border-radius:8px;
+font-size:10px;
+margin:3px;
+color:#bbb;
+}
+
+.teacher a{
+display:inline-block;
+margin-top:9px;
+padding:7px 11px;
+background:var(--gold);
+color:#111;
+text-decoration:none;
+border-radius:8px;
+font-size:10px;
+font-weight:900;
+}
+
+/* AVERAGE */
+
+.average-grid{
+display:grid;
+grid-template-columns:1.5fr .8fr;
+gap:18px;
+}
+
+.grade-list{
+background:#101010;
+border:1px solid #222;
+border-radius:20px;
+padding:20px;
+}
+
+.grade-row{
+display:grid;
+grid-template-columns:1fr 90px 75px;
+align-items:center;
+gap:10px;
+margin-bottom:9px;
+}
+
+.grade-row span{font-size:12px;color:#bbb}
+.coef{text-align:center;color:#666;font-size:10px}
+
+.average-result{
+background:
+radial-gradient(circle at center,rgba(216,180,90,.13),transparent 65%),
+#101010;
+border:1px solid var(--line);
+border-radius:20px;
+padding:30px;
+text-align:center;
+min-height:260px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.average-result small{color:#777}
+
+.average-number{
+font-size:65px;
+color:var(--gold2);
+font-weight:900;
+line-height:1.2;
+}
+
+.progress{
+height:8px;
+border-radius:20px;
+background:#1e1e1e;
+overflow:hidden;
+margin-top:15px;
+}
+
+.progress-bar{
+height:100%;
+background:linear-gradient(90deg,var(--gold3),var(--gold2));
+width:0%;
+transition:.5s;
+}
+
+/* SCHEDULE */
+
+.add{
+border:0;
+padding:10px 15px;
+border-radius:10px;
+background:var(--gold);
+color:#111;
+font-weight:900;
+}
+
+.table-wrap{
+overflow:auto;
+border:1px solid #222;
+border-radius:18px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:700px;
+background:#101010;
+}
+
+th,td{
+padding:13px;
+border-bottom:1px solid #222;
+text-align:right;
+}
+
+th{color:var(--gold2);font-size:11px}
+td{font-size:11px;color:#aaa}
+
+.delete{
+border:0;
+background:#321414;
+color:#ff7777;
+padding:6px 9px;
+border-radius:7px;
+}
+
+/* GOALS */
+
+.goal-form{
+display:grid;
+grid-template-columns:1fr 150px auto;
+gap:10px;
+margin-bottom:18px;
+}
+
+.goal{
+display:flex;
+align-items:center;
+gap:12px;
+padding:15px;
+background:#101010;
+border:1px solid #222;
+border-radius:14px;
+margin-bottom:9px;
+}
+
+.goal.done{opacity:.5}
+
+.goal input[type=checkbox]{
+width:18px;
+height:18px;
+accent-color:var(--gold);
+}
+
+.goal-text{flex:1}
+.goal-text strong{font-size:12px}
+.goal-text small{
+display:block;
+color:#666;
+font-size:9px;
+}
+
+/* CAREERS */
+
+.career-filter{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:10px;
+margin-bottom:20px;
+}
+
+.career-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.career{
+background:#101010;
+border:1px solid #222;
+border-radius:19px;
+padding:20px;
+position:relative;
+overflow:hidden;
+}
+
+.career:before{
+content:"";
+position:absolute;
+width:100px;height:100px;
+border-radius:50%;
+background:rgba(216,180,90,.07);
+left:-40px;top:-40px;
+}
+
+.career-icon{
+font-size:30px;
+margin-bottom:10px;
+position:relative;
+}
+
+.career h3{
+font-size:15px;
+position:relative;
+}
+
+.career p{
+color:#777;
+font-size:10px;
+line-height:1.9;
+margin:7px 0;
+position:relative;
+}
+
+.career-rate{
+display:inline-block;
+padding:5px 9px;
+border-radius:8px;
+background:rgba(216,180,90,.1);
+color:var(--gold2);
+font-size:10px;
+font-weight:800;
+position:relative;
+}
+
+.career-tag{
+display:inline-block;
+margin-top:8px;
+font-size:9px;
+color:#666;
+position:relative;
+}
+
+/* COUNTDOWN */
+
+.countdown{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-top:20px;
+max-width:700px;
+}
+
+.time-box{
+text-align:center;
+padding:15px;
+border:1px solid var(--line);
+border-radius:14px;
+background:#0c0c0c;
+}
+
+.time-box strong{
+display:block;
+font-size:27px;
+color:var(--gold2);
+}
+
+.time-box span{
+color:#666;
+font-size:9px;
+}
+
+/* PROFILE */
+
+.profile-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+}
+
+.profile-card{
+background:#101010;
+border:1px solid #222;
+border-radius:20px;
+padding:22px;
+}
+
+.profile-avatar{
+width:90px;height:90px;
+border-radius:50%;
+margin:0 auto 15px;
+background:linear-gradient(145deg,var(--gold2),var(--gold3));
+color:#111;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+font-weight:900;
+}
+
+.center{text-align:center}
+
+/* TOAST */
+
+#toast{
+position:fixed;
+bottom:25px;
+left:25px;
+background:#151515;
+border:1px solid var(--line);
+color:white;
+padding:12px 18px;
+border-radius:12px;
+opacity:0;
+transform:translateY(20px);
+pointer-events:none;
+transition:.3s;
+z-index:3000;
+font-size:11px;
+}
+
+#toast.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+.sidebar{
+transform:translateX(100%);
+transition:.3s;
+}
+
+.sidebar.open{transform:translateX(0)}
+
+.main{
+margin-right:0;
+padding:18px;
+}
+
+.mobile-menu{display:block}
+
+.stats{grid-template-columns:repeat(2,1fr)}
+.grid,.subject-grid,.career-grid{grid-template-columns:1fr 1fr}
+.average-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:650px){
+
+.auth-container{padding:25px 20px}
+
+.top-title h2{font-size:19px}
+.user-box{display:none}
+
+.hero{padding:25px 20px}
+.hero h1{font-size:22px}
+
+.stats{
+grid-template-columns:1fr 1fr;
+gap:9px;
+}
+
+.stat{padding:14px}
+.stat strong{font-size:20px}
+
+.grid,.subject-grid,.career-grid,.profile-grid{
+grid-template-columns:1fr;
+}
+
+.goal-form,.career-filter{
+grid-template-columns:1fr;
+}
+
+.grade-row{
+grid-template-columns:1fr 65px 70px;
+}
+
+.average-number{font-size:55px}
+
+.countdown{grid-template-columns:repeat(2,1fr)}
+}
+
+@keyframes appear{
+from{opacity:0;transform:translateY(12px)}
+to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= AUTH ================= -->
+
+<div id="auth">
+
+<div class="auth-container">
+
+<div class="brand">
+<div class="brand-logo">🎓</div>
+<h1>BAC ELITE DZ</h1>
+<p>منصة الطالب الجزائري نحو النجاح</p>
+</div>
+
+<div class="auth-tabs">
+
+<button id="loginTab" class="active"
+onclick="switchAuth('login')">
+تسجيل الدخول
+</button>
+
+<button id="registerTab"
+onclick="switchAuth('register')">
+إنشاء حساب
+</button>
+
+</div>
+
+<div id="loginBox">
+
+<div class="field">
+<label>اسم المستخدم</label>
+<input id="loginUser" placeholder="أدخل اسم المستخدم">
+</div>
+
+<div class="field">
+<label>رمز المرور</label>
+<input id="loginPass" type="password"
+placeholder="أدخل رمز المرور">
+</div>
+
+<button class="gold-btn" onclick="login()">
+دخول إلى منصتي
+</button>
+
+</div>
+
+<div id="registerBox" class="hidden">
+
+<div class="field">
+<label>اسم المستخدم</label>
+<input id="regUser" placeholder="مثال: zaki2027">
+</div>
+
+<div class="field">
+<label>رمز المرور</label>
+<input id="regPass" type="password"
+placeholder="أنشئ رمز مرور">
+</div>
+
+<div class="field">
+<label>الشعبة</label>
+
+<select id="regBranch">
+
+<option>علوم تجريبية</option>
+<option>رياضيات</option>
+<option>تقني رياضي</option>
+<option>تسيير واقتصاد</option>
+<option>آداب وفلسفة</option>
+<option>لغات أجنبية</option>
+
+</select>
+
+</div>
+
+<button class="gold-btn" onclick="register()">
+إنشاء حسابي
+</button>
+
+</div>
+
+<div class="auth-note">
+بيانات الحساب تحفظ تلقائياً على هذا المتصفح.
+</div>
+
+</div>
+</div>
+
+
+<!-- ================= APP ================= -->
+
+<div id="app">
+
+<aside class="sidebar" id="sidebar">
+
+<div class="side-brand">
+<strong>BAC ELITE DZ</strong>
+<span>ALGERIAN BAC STUDENT PLATFORM</span>
+</div>
+
+<div class="nav">
+
+<button class="active"
+onclick="openSection('home',this)">
+🏠 الرئيسية
+</button>
+
+<button onclick="openSection('subjects',this)">
+📚 المواد والأساتذة
+</button>
+
+<button onclick="openSection('careers',this)">
+🎓 ماذا بعد البكالوريا؟
+</button>
+
+<button onclick="openSection('schedule',this)">
+📅 برنامجي الدراسي
+</button>
+
+<button onclick="openSection('average',this)">
+🧮 المعدل
+</button>
+
+<button onclick="openSection('goals',this)">
+🎯 أهدافي اليومية
+</button>
+
+<button onclick="openSection('bac',this)">
+⏳ عداد البكالوريا
+</button>
+
+<button onclick="openSection('profile',this)">
+👤 حسابي
+</button>
+
+</div>
+
+<button class="logout" onclick="logout()">
+تسجيل الخروج
+</button>
+
+</aside>
+
+
+<main class="main">
+
+<div class="topbar">
+
+<div class="top-title">
+<h2>مرحباً، <span id="userName"></span> 👋</h2>
+<p id="branchText"></p>
+</div>
+
+<div class="user-box">
+<div class="avatar" id="avatar"></div>
+</div>
+
+<button class="mobile-menu" onclick="toggleSidebar()">
+☰
+</button>
+
+</div>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="section active">
+
+<div class="hero">
+
+<small style="color:var(--gold)">
+BAC ELITE DZ • STUDENT SUCCESS
+</small>
+
+<h1>
+مستقبلك يبدأ من تنظيمك.
+</h1>
+
+<p>
+تابع معدلك، اكتشف أفضل المدرسين، خطط للمراجعة،
+وتعرف على التخصصات التي يمكنك الالتحاق بها بعد النجاح.
+</p>
+
+<div class="countdown" id="homeCountdown"></div>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<small>الشعبة</small>
+<strong id="statBranch">—</strong>
+</div>
+
+<div class="stat">
+<small>عدد المواد</small>
+<strong id="statSubjects">—</strong>
+</div>
+
+<div class="stat">
+<small>المعدل الحالي</small>
+<strong id="statAverage">0.00</strong>
+</div>
+
+<div class="stat">
+<small>الأهداف المنجزة</small>
+<strong id="statGoals">0%</strong>
+</div>
+
+</div>
+
+<div class="section-head">
+<div>
+<h2>لوحة الطالب</h2>
+<p>أهم أدواتك في مكان واحد.</p>
+</div>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">👨‍🏫</div>
+<h3>أفضل الأساتذة</h3>
+<p>
+اختر مدرساً مناسباً لكل مادة وافتح دروسه مباشرة.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🎓</div>
+<h3>مستقبلك الجامعي</h3>
+<p>
+تعرف على التخصصات والمسارات التي يمكنك اختيارها.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🧮</div>
+<h3>حاسبة المعدل</h3>
+<p>
+أدخل نقاطك وتابع معدلك مباشرة.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SUBJECTS ================= -->
+
+<section id="subjects" class="section">
+
+<div class="section-head">
+
+<div>
+<h2>المواد والأساتذة 👨‍🏫</h2>
+<p>
+أسماء أساتذة موصى بهم لكل مادة.
+</p>
+</div>
+
+</div>
+
+<div class="subject-grid" id="subjectsContainer"></div>
+
+</section>
+
+
+<!-- ================= CAREERS ================= -->
+
+<section id="careers" class="section">
+
+<div class="section-head">
+
+<div>
+<h2>ماذا بعد البكالوريا؟ 🎓</h2>
+
+<p>
+اكتشف التخصصات والمسارات حسب معدلك.
+</p>
+
+</div>
+
+</div>
+
+<div class="career-filter">
+
+<select id="careerBranch" onchange="renderCareers()">
+<option value="all">كل الشعب</option>
+<option value="علوم تجريبية">علوم تجريبية</option>
+<option value="رياضيات">رياضيات</option>
+<option value="تقني رياضي">تقني رياضي</option>
+<option value="تسيير واقتصاد">تسيير واقتصاد</option>
+<option value="آداب وفلسفة">آداب وفلسفة</option>
+<option value="لغات أجنبية">لغات أجنبية</option>
+</select>
+
+<input
+id="careerAverage"
+type="number"
+min="0"
+max="20"
+step=".01"
+placeholder="أدخل معدلك مثلاً 15.50"
+oninput="renderCareers()"
+>
+
+<select id="careerSort" onchange="renderCareers()">
+<option value="all">كل المعدلات</option>
+<option value="high">معدلات مرتفعة</option>
+<option value="medium">معدلات متوسطة</option>
+</select>
+
+</div>
+
+<div class="card" style="margin-bottom:20px">
+
+<h3>⚠️ تنبيه مهم</h3>
+
+<p>
+معدلات القبول تتغير كل سنة حسب نتائج التوجيه والمقاعد
+والشعبة والولاية. الأرقام الظاهرة هنا مرجعية وليست ضماناً
+للقبول. يجب دائماً الرجوع إلى منصة التوجيه الرسمية عند
+صدور نتائج السنة الجديدة.
+</p>
+
+</div>
+
+<div class="career-grid" id="careerContainer"></div>
+
+</section>
+
+
+<!-- ================= SCHEDULE ================= -->
+
+<section id="schedule" class="section">
+
+<div class="section-head">
+
+<div>
+<h2>برنامجي الدراسي 📅</h2>
+<p>نظم حصص المراجعة الخاصة بك.</p>
+</div>
+
+<button class="add" onclick="addSchedule()">
++ إضافة حصة
+</button>
+
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>اليوم</th>
+<th>المادة</th>
+<th>وقت البداية</th>
+<th>المدة</th>
+<th>الملاحظات</th>
+<th>إجراء</th>
+</tr>
+
+</thead>
+
+<tbody id="scheduleBody"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- ================= AVERAGE ================= -->
+
+<section id="average" class="section">
+
+<div class="section-head">
+
+<div>
+<h2>حاسبة المعدل 🧮</h2>
+<p>الحساب والحفظ تلقائيان.</p>
+</div>
+
+</div>
+
+<div class="average-grid">
+
+<div class="grade-list">
+<div id="gradesContainer"></div>
+</div>
+
+<div class="average-result">
+
+<small>معدلك الحالي</small>
+
+<div class="average-number" id="averageNumber">
+0.00
+</div>
+
+<small>من 20</small>
+
+<div class="progress">
+<div class="progress-bar" id="averageProgress"></div>
+</div>
+
+<p style="margin-top:15px;color:#666;font-size:10px">
+أدخل علاماتك لتشاهد النتيجة مباشرة.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= GOALS ================= -->
+
+<section id="goals" class="section">
+
+<div class="section-head">
+
+<div>
+<h2>أهدافي اليومية 🎯</h2>
+<p>أنشئ أهدافاً للمراجعة وتابع تقدمك.</p>
+</div>
+
+</div>
+
+<div class="goal-form">
+
+<input id="goalText"
+placeholder="مثال: حل 3 تمارين في الرياضيات">
+
+<input id="goalDate" type="date">
+
+<button class="add" onclick="addGoal()">
+إضافة هدف
+</button>
+
+</div>
+
+<div id="goalsContainer"></div>
+
+</section>
+
+
+<!-- ================= BAC ================= -->
+
+<section id="bac" class="section">
+
+<div class="hero">
+
+<small style="color:var(--gold)">
+COUNTDOWN TO BAC
+</small>
+
+<h1>
+الوقت المتبقي حتى البكالوريا ⏳
+</h1>
+
+<p>
+كل يوم منظم هو خطوة أقرب إلى التخصص الذي تحلم به.
+</p>
+
+<div class="countdown" id="mainCountdown"></div>
+
+</div>
+
+<div class="card">
+
+<h3>💡 نصيحة</h3>
+
+<p>
+لا تجعل هدفك حفظ أكبر عدد من الدروس فقط.
+اجعل هدفك فهم الدرس ثم حل التمارين والبكالوريات السابقة
+وتصحيح أخطائك.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= PROFILE ================= -->
+
+<section id="profile" class="section">
+
+<div class="section-head">
+
+<div>
+<h2>حسابي 👤</h2>
+<p>إدارة معلومات حسابك.</p>
+</div>
+
+</div>
+
+<div class="profile-grid">
+
+<div class="profile-card center">
+
+<div class="profile-avatar" id="profileAvatar"></div>
+
+<h3 id="profileName"></h3>
+
+<p id="profileBranchText"
+style="color:#666;font-size:11px"></p>
+
+</div>
+
+<div class="profile-card">
+
+<div class="field">
+
+<label>اسم المستخدم</label>
+
+<input id="profileUsername" disabled>
+
+</div>
+
+<div class="field">
+
+<label>الشعبة</label>
+
+<select id="profileBranch">
+
+<option>علوم تجريبية</option>
+<option>رياضيات</option>
+<option>تقني رياضي</option>
+<option>تسيير واقتصاد</option>
+<option>آداب وفلسفة</option>
+<option>لغات أجنبية</option>
+
+</select>
+
+</div>
+
+<button class="gold-btn" onclick="saveProfile()">
+حفظ التغييرات
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+</div>
+
+<div id="toast"></div>
+
+
+<script>
+
+/* =====================================================
+   المواد
+===================================================== */
+
+const subjects={
+
+"علوم تجريبية":[
+["الرياضيات","➗","رياضيات",5],
+["العلوم الطبيعية","🧬","علوم",6],
+["الفيزياء","⚛️","فيزياء",5],
+["اللغة العربية","📖","عربية",3],
+["الفرنسية","🇫🇷","فرنسية",2],
+["الإنجليزية","🇬🇧","إنجليزية",2],
+["الفلسفة","🧠","فلسفة",2],
+["التاريخ والجغرافيا","🌍","اجتماعيات",2],
+["العلوم الإسلامية","☪️","إسلامية",2]
+],
+
+"رياضيات":[
+["الرياضيات","➗","رياضيات",7],
+["الفيزياء","⚛️","فيزياء",6],
+["العلوم الطبيعية","🧬","علوم",2],
+["اللغة العربية","📖","عربية",3],
+["الفرنسية","🇫🇷","فرنسية",2],
+["الإنجليزية","🇬🇧","إنجليزية",2],
+["الفلسفة","🧠","فلسفة",2],
+["التاريخ والجغرافيا","🌍","اجتماعيات",2]
+],
+
+"تقني رياضي":[
+["الرياضيات","➗","رياضيات",6],
+["الفيزياء","⚛️","فيزياء",6],
+["التكنولوجيا","⚙️","تكنولوجيا",7],
+["اللغة العربية","📖","عربية",3],
+["الفرنسية","🇫🇷","فرنسية",2],
+["الإنجليزية","🇬🇧","إنجليزية",2],
+["الفلسفة","🧠","فلسفة",2],
+["التاريخ والجغرافيا","🌍","اجتماعيات",2]
+],
+
+"تسيير واقتصاد":[
+["الاقتصاد والمناجمنت","💼","اقتصاد",5],
+["التسيير المحاسبي والمالي","📊","محاسبة",5],
+["الرياضيات","➗","رياضيات",5],
+["القانون","⚖️","قانون",2],
+["اللغة العربية","📖","عربية",3],
+["الفرنسية","🇫🇷","فرنسية",2],
+["الإنجليزية","🇬🇧","إنجليزية",2],
+["الفلسفة","🧠","فلسفة",2]
+],
+
+"آداب وفلسفة":[
+["اللغة العربية","📖","عربية",6],
+["الفلسفة","🧠","فلسفة",6],
+["التاريخ والجغرافيا","🌍","اجتماعيات",4],
+["الفرنسية","🇫🇷","فرنسية",3],
+["الإنجليزية","🇬🇧","إنجليزية",3],
+["الرياضيات","➗","رياضيات",2],
+["العلوم الإسلامية","☪️","إسلامية",2]
+],
+
+"لغات أجنبية":[
+["اللغة العربية","📖","عربية",3],
+["الفرنسية","🇫🇷","فرنسية",5],
+["الإنجليزية","🇬🇧","إنجليزية",5],
+["الإسبانية","🇪🇸","إسبانية",4],
+["الألمانية","🇩🇪","ألمانية",4],
+["الفلسفة","🧠","فلسفة",2],
+["التاريخ والجغرافيا","🌍","اجتماعيات",2]
+]
+
+};
+
+
+/* =====================================================
+   الأساتذة الموصى بهم
+===================================================== */
+
+const teachers={
+
+"رياضيات":[
+"الأستاذ نور الدين",
+"الأستاذ عبد الباسط",
+"Infinity Math",
+"الدكتور السكي داود",
+"الأستاذ كساسي"
+],
+
+"فيزياء":[
+"محمد الأمين زدون",
+"الأستاذ أحمد ترير",
+"الأستاذ عبد الله",
+"الأستاذ سيد أحمد شعلال",
+"الأستاذ طيايبة عبد الرزاق"
+],
+
+"علوم":[
+"الأستاذة كتفي شريف زينة",
+"الأستاذ شاوش",
+"أيوب للعلوم",
+"الأستاذ مصطفى بدد",
+"خيرة فليتي"
+],
+
+"عربية":[
+"الأستاذ حيقون أسامة",
+"الأستاذ بوبكر مبروك",
+"الأستاذ خالد حماش",
+"الأستاذ بلخير أسامة"
+],
+
+"فرنسية":[
+"الأستاذة سالي",
+"الأستاذة بوغدادة",
+"الأستاذ أسامة"
+],
+
+"إنجليزية":[
+"الأستاذ عبد المؤمن",
+"الأستاذ جيار",
+"الأستاذ أمين"
+],
+
+"فلسفة":[
+"الأستاذ هواري",
+"الأستاذ خليل سعيداني",
+"الأستاذ عادل مقرود",
+"الأستاذ حمداش عبد الحق"
+],
+
+"اجتماعيات":[
+"الأستاذ بورنان",
+"الأستاذ محمد العروق",
+"El Amine School"
+],
+
+"إسلامية":[
+"الأستاذة بوسعادي",
+"الدكتور شمس الدين",
+"الأستاذ موسلي",
+"الأستاذ سعدون شعيب"
+],
+
+"تكنولوجيا":[
+"الأستاذ بن عربية امحمد",
+"الأستاذ جادل عبد المجيد"
+],
+
+"اقتصاد":[
+"أساتذة الاقتصاد والمناجمنت",
+"قنوات التسيير والاقتصاد BAC"
+],
+
+"محاسبة":[
+"عبد الخالق عودة",
+"قنوات المحاسبة BAC"
+],
+
+"قانون":[
+"قنوات القانون للبكالوريا",
+"أساتذة القانون BAC"
+],
+
+"إسبانية":[
+"أساتذة الإسبانية BAC",
+"قنوات اللغة الإسبانية الجزائرية"
+],
+
+"ألمانية":[
+"أساتذة الألمانية BAC",
+"قنوات اللغة الألمانية الجزائرية"
+]
+
+};
+
+
+/* =====================================================
+   التخصصات بعد البكالوريا
+===================================================== */
+
+const careers=[
+
+{
+name:"الطب",
+icon:"🩺",
+branch:"علوم تجريبية",
+rate:16.33,
+desc:"مسار العلوم الطبية والتكوين في الطب العام ثم التخصص.",
+tag:"علوم طبية"
+},
+
+{
+name:"طب الأسنان",
+icon:"🦷",
+branch:"علوم تجريبية",
+rate:16.81,
+desc:"دراسة طب الأسنان والعمل في مجال صحة الفم والأسنان.",
+tag:"علوم طبية"
+},
+
+{
+name:"الصيدلة",
+icon:"💊",
+branch:"علوم تجريبية",
+rate:16.03,
+desc:"مسار الصيدلة والدواء والمجالات الصيدلانية.",
+tag:"علوم طبية"
+},
+
+{
+name:"الذكاء الاصطناعي",
+icon:"🤖",
+branch:"رياضيات",
+rate:18.44,
+desc:"الذكاء الاصطناعي، تعلم الآلة، البيانات والأنظمة الذكية.",
+tag:"مدرسة وطنية عليا"
+},
+
+{
+name:"الإعلام الآلي — ESI الجزائر",
+icon:"💻",
+branch:"رياضيات",
+rate:18.13,
+desc:"تكوين متقدم في الإعلام الآلي وهندسة البرمجيات.",
+tag:"مدرسة وطنية عليا"
+},
+
+{
+name:"الأمن السيبراني",
+icon:"🛡️",
+branch:"رياضيات",
+rate:18.10,
+desc:"حماية الأنظمة والشبكات والبيانات والأمن الرقمي.",
+tag:"مدرسة وطنية عليا"
+},
+
+{
+name:"الأنظمة المستقلة",
+icon:"🦾",
+branch:"رياضيات",
+rate:18.06,
+desc:"الروبوتات والأنظمة الذكية والتحكم والأتمتة.",
+tag:"مدرسة وطنية عليا"
+},
+
+{
+name:"النانو وتكنولوجيا النانو",
+icon:"🔬",
+branch:"علوم تجريبية",
+rate:17.69,
+desc:"المواد النانوية والعلوم والتكنولوجيا الحديثة.",
+tag:"مدرسة وطنية عليا"
+},
+
+{
+name:"المدرسة الوطنية متعددة التقنيات — الجزائر",
+icon:"⚙️",
+branch:"تقني رياضي",
+rate:17.63,
+desc:"الهندسة والتخصصات التقنية المتقدمة.",
+tag:"هندسة"
+},
+
+{
+name:"المدرسة العليا للرياضيات",
+icon:"📐",
+branch:"رياضيات",
+rate:17.43,
+desc:"تكوين متخصص وعميق في الرياضيات.",
+tag:"رياضيات"
+},
+
+{
+name:"الإعلام الآلي — سيدي بلعباس",
+icon:"🖥️",
+branch:"رياضيات",
+rate:17.23,
+desc:"الإعلام الآلي وتطوير البرمجيات والأنظمة.",
+tag:"إعلام آلي"
+},
+
+{
+name:"المدرسة الوطنية متعددة التقنيات — وهران",
+icon:"🏗️",
+branch:"تقني رياضي",
+rate:16.49,
+desc:"الهندسة والعلوم التطبيقية والتكنولوجيا.",
+tag:"هندسة"
+},
+
+{
+name:"الاقتصاد والمناجمنت",
+icon:"💼",
+branch:"تسيير واقتصاد",
+rate:12.00,
+desc:"المؤسسات، الإدارة، الاقتصاد، التسويق والمالية.",
+tag:"اقتصاد"
+},
+
+{
+name:"المحاسبة والمالية",
+icon:"📊",
+branch:"تسيير واقتصاد",
+rate:11.50,
+desc:"المحاسبة، التدقيق، الضرائب والمالية.",
+tag:"تسيير"
+},
+
+{
+name:"الحقوق",
+icon:"⚖️",
+branch:"آداب وفلسفة",
+rate:11.00,
+desc:"القانون، الحقوق، القضاء والمسارات القانونية.",
+tag:"حقوق"
+},
+
+{
+name:"علم النفس",
+icon:"🧠",
+branch:"آداب وفلسفة",
+rate:11.00,
+desc:"دراسة السلوك والعمليات النفسية والمجالات الإنسانية.",
+tag:"علوم إنسانية"
+},
+
+{
+name:"اللغة الإنجليزية",
+icon:"🇬🇧",
+branch:"لغات أجنبية",
+rate:10.00,
+desc:"التدريس والترجمة واللغات والتواصل الدولي.",
+tag:"لغات"
+},
+
+{
+name:"اللغة الفرنسية",
+icon:"🇫🇷",
+branch:"لغات أجنبية",
+rate:10.00,
+desc:"اللغة والأدب والترجمة والتعليم.",
+tag:"لغات"
+},
+
+{
+name:"المدرسة العليا للأساتذة",
+icon:"👨‍🏫",
+branch:"all",
+rate:12.00,
+desc:"مسار تكوين الأساتذة في مختلف المواد والمراحل.",
+tag:"تعليم"
+},
+
+{
+name:"علوم وتكنولوجيا",
+icon:"🧪",
+branch:"علوم تجريبية",
+rate:12.00,
+desc:"علوم المادة والهندسة والتكنولوجيا والتخصصات التطبيقية.",
+tag:"علوم وتكنولوجيا"
+},
+
+{
+name:"الإعلام الآلي",
+icon:"💻",
+branch:"علوم تجريبية",
+rate:12.00,
+desc:"البرمجة، قواعد البيانات، الشبكات وتطوير الأنظمة.",
+tag:"إعلام آلي"
+},
+
+{
+name:"الهندسة الكهربائية",
+icon:"⚡",
+branch:"تقني رياضي",
+rate:12.00,
+desc:"الكهرباء، الإلكترونيات، التحكم والأنظمة الصناعية.",
+tag:"هندسة"
+},
+
+{
+name:"الهندسة الميكانيكية",
+icon:"🔧",
+branch:"تقني رياضي",
+rate:12.00,
+desc:"التصميم الميكانيكي والتصنيع والأنظمة الصناعية.",
+tag:"هندسة"
+}
+
+];
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+function switchAuth(type){
+
+document.getElementById("loginBox")
+.classList.toggle("hidden",type!=="login");
+
+document.getElementById("registerBox")
+.classList.toggle("hidden",type!=="register");
+
+document.getElementById("loginTab")
+.classList.toggle("active",type==="login");
+
+document.getElementById("registerTab")
+.classList.toggle("active",type==="register");
+
+}
+
+function getUsers(){
+
+return JSON.parse(
+localStorage.getItem("BAC_ELITE_USERS") || "{}"
+);
+
+}
+
+function saveUsers(users){
+
+localStorage.setItem(
+"BAC_ELITE_USERS",
+JSON.stringify(users)
+);
+
+}
+
+function register(){
+
+let username=document.getElementById("regUser").value.trim();
+let password=document.getElementById("regPass").value;
+let branch=document.getElementById("regBranch").value;
+
+if(username.length<3){
+toast("اسم المستخدم يجب أن يكون 3 أحرف على الأقل.");
+return;
+}
+
+if(password.length<4){
+toast("رمز المرور يجب أن يكون 4 أحرف على الأقل.");
+return;
+}
+
+let users=getUsers();
+
+if(users[username]){
+toast("اسم المستخدم موجود مسبقاً.");
+return;
+}
+
+users[username]={
+password:password,
+branch:branch,
+grades:{},
+schedule:[],
+goals:[]
+};
+
+saveUsers(users);
+
+localStorage.setItem("BAC_CURRENT_USER",username);
+
+toast("تم إنشاء الحساب بنجاح 🎉");
+
+setTimeout(loadApp,500);
+
+}
+
+function login(){
+
+let username=document.getElementById("loginUser").value.trim();
+let password=document.getElementById("loginPass").value;
+
+let users=getUsers();
+
+if(!users[username]){
+toast("الحساب غير موجود.");
+return;
+}
+
+if(users[username].password!==password){
+toast("رمز المرور غير صحيح.");
+return;
+}
+
+localStorage.setItem("BAC_CURRENT_USER",username);
+
+loadApp();
+
+}
+
+function logout(){
+
+localStorage.removeItem("BAC_CURRENT_USER");
+
+document.getElementById("app").style.display="none";
+document.getElementById("auth").style.display="flex";
+
+}
+
+
+/* =====================================================
+   USER
+===================================================== */
+
+function currentUser(){
+
+let username=localStorage.getItem("BAC_CURRENT_USER");
+let users=getUsers();
+
+if(!username || !users[username])return null;
+
+return {
+username:username,
+data:users[username]
+};
+
+}
+
+function loadApp(){
+
+let current=currentUser();
+
+if(!current)return;
+
+document.getElementById("auth").style.display="none";
+document.getElementById("app").style.display="block";
+
+updateUserUI();
+renderSubjects();
+renderCareers();
+renderGrades();
+renderSchedule();
+renderGoals();
+updateCountdown();
+
+}
+
+function updateUserUI(){
+
+let current=currentUser();
+let username=current.username;
+let user=current.data;
+
+document.getElementById("userName").textContent=username;
+document.getElementById("branchText").textContent="شعبة "+user.branch;
+
+document.getElementById("avatar").textContent=
+username.charAt(0).toUpperCase();
+
+document.getElementById("profileAvatar").textContent=
+username.charAt(0).toUpperCase();
+
+document.getElementById("profileName").textContent=username;
+
+document.getElementById("profileBranchText").textContent=
+"شعبة "+user.branch;
+
+document.getElementById("profileUsername").value=username;
+
+document.getElementById("profileBranch").value=user.branch;
+
+document.getElementById("statBranch").textContent=user.branch;
+
+document.getElementById("statSubjects").textContent=
+subjects[user.branch].length;
+
+}
+
+
+/* =====================================================
+   NAV
+===================================================== */
+
+function openSection(id,button){
+
+document.querySelectorAll(".section")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll(".nav button")
+.forEach(x=>x.classList.remove("active"));
+
+if(button)button.classList.add("active");
+
+document.getElementById("sidebar").classList.remove("open");
+
+}
+
+function toggleSidebar(){
+
+document.getElementById("sidebar").classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   SUBJECTS
+===================================================== */
+
+function renderSubjects(){
+
+let user=currentUser().data;
+let container=document.getElementById("subjectsContainer");
+
+container.innerHTML="";
+
+subjects[user.branch].forEach(item=>{
+
+let name=item[0];
+let icon=item[1];
+let key=item[2];
+let coef=item[3];
+
+let names=teachers[key] || ["مصادر تعليمية للبكالوريا"];
+
+let search=
+"https://www.youtube.com/results?search_query="+
+encodeURIComponent(
+"بكالوريا الجزائر "+name+" "+names[0]
+);
+
+let namesHTML=names.map(n=>`
+<span class="teacher-name">${n}</span>
+`).join("");
+
+container.innerHTML+=`
+
+<div class="subject">
+
+<div class="subject-top">
+
+<div class="subject-icon">
+${icon}
+</div>
+
+<div>
+<h3>${name}</h3>
+<small>المعامل: ${coef}</small>
+</div>
+
+</div>
+
+<div class="teacher">
+
+<div class="teacher-title">
+⭐ أساتذة موصى بهم
+</div>
+
+${namesHTML}
+
+<br>
+
+<a href="${search}" target="_blank">
+مشاهدة الدروس ↗
+</a>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =====================================================
+   CAREERS
+===================================================== */
+
+function renderCareers(){
+
+let branch=
+document.getElementById("careerBranch").value;
+
+let avg=
+Number(document.getElementById("careerAverage").value);
+
+let sort=
+document.getElementById("careerSort").value;
+
+let container=
+document.getElementById("careerContainer");
+
+container.innerHTML="";
+
+let list=careers.filter(c=>{
+
+let branchOK=
+branch==="all" ||
+c.branch==="all" ||
+c.branch===branch;
+
+let avgOK=
+!avg || avg>=c.rate;
+
+let sortOK=true;
+
+if(sort==="high")sortOK=c.rate>=16;
+if(sort==="medium")sortOK=c.rate>=11 && c.rate<16;
+
+return branchOK && avgOK && sortOK;
+
+});
+
+list.sort((a,b)=>b.rate-a.rate);
+
+if(!list.length){
+
+container.innerHTML=`
+
+<div class="card">
+
+<h3>لم نجد تخصصاً مطابقاً 🎯</h3>
+
+<p>
+جرّب رفع المعدل أو اختيار "كل الشعب".
+وتذكر أن معدلات القبول تتغير من سنة إلى أخرى.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+list.forEach(c=>{
+
+container.innerHTML+=`
+
+<div class="career">
+
+<div class="career-icon">
+${c.icon}
+</div>
+
+<h3>${c.name}</h3>
+
+<p>
+${c.desc}
+</p>
+
+<span class="career-rate">
+مرجع القبول: ${c.rate.toFixed(2)}
+</span>
+
+<div class="career-tag">
+${c.tag} • ${c.branch==="all"?"عدة شعب":c.branch}
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =====================================================
+   GRADES
+===================================================== */
+
+function renderGrades(){
+
+let user=currentUser().data;
+let container=document.getElementById("gradesContainer");
+
+container.innerHTML="";
+
+subjects[user.branch].forEach(item=>{
+
+let name=item[0];
+let coef=item[3];
+let value=user.grades[name] ?? "";
+
+container.innerHTML+=`
+
+<div class="grade-row">
+
+<span>${name}</span>
+
+<input
+type="number"
+min="0"
+max="20"
+step=".25"
+value="${value}"
+placeholder="0-20"
+oninput="saveGrade('${name}',this.value)"
+>
+
+<div class="coef">× ${coef}</div>
+
+</div>
+
+`;
+
+});
+
+calculateAverage();
+
+}
+
+function saveGrade(name,value){
+
+let users=getUsers();
+let username=localStorage.getItem("BAC_CURRENT_USER");
+
+users[username].grades[name]=
+value==="" ? "" : Number(value);
+
+saveUsers(users);
+
+calculateAverage();
+
+}
+
+function calculateAverage(){
+
+let current=currentUser();
+
+if(!current)return;
+
+let user=current.data;
+let total=0;
+let coefs=0;
+
+subjects[user.branch].forEach(item=>{
+
+let name=item[0];
+let coef=item[3];
+let grade=Number(user.grades[name]);
+
+if(!isNaN(grade)&&grade>=0){
+total+=grade*coef;
+coefs+=coef;
+}
+
+});
+
+let avg=coefs?total/coefs:0;
+
+document.getElementById("averageNumber")
+.textContent=avg.toFixed(2);
+
+document.getElementById("statAverage")
+.textContent=avg.toFixed(2);
+
+document.getElementById("averageProgress")
+.style.width=Math.min(avg*5,100)+"%";
+
+}
+
+
+/* =====================================================
+   SCHEDULE
+===================================================== */
+
+function renderSchedule(){
+
+let user=currentUser().data;
+let body=document.getElementById("scheduleBody");
+
+body.innerHTML="";
+
+user.schedule.forEach((item,index)=>{
+
+body.innerHTML+=`
+
+<tr>
+
+<td>
+<input value="${item.day||""}"
+placeholder="الأحد"
+onchange="updateSchedule(${index},'day',this.value)">
+</td>
+
+<td>
+<input value="${item.subject||""}"
+placeholder="رياضيات"
+onchange="updateSchedule(${index},'subject',this.value)">
+</td>
+
+<td>
+<input type="time"
+value="${item.time||""}"
+onchange="updateSchedule(${index},'time',this.value)">
+</td>
+
+<td>
+<input value="${item.duration||""}"
+placeholder="1 ساعة"
+onchange="updateSchedule(${index},'duration',this.value)">
+</td>
+
+<td>
+<input value="${item.note||""}"
+placeholder="مراجعة..."
+onchange="updateSchedule(${index},'note',this.value)">
+</td>
+
+<td>
+<button class="delete"
+onclick="deleteSchedule(${index})">
+حذف
+</button>
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+function addSchedule(){
+
+let users=getUsers();
+let username=localStorage.getItem("BAC_CURRENT_USER");
+
+users[username].schedule.push({
+day:"الأحد",
+subject:"",
+time:"",
+duration:"1 ساعة",
+note:""
+});
+
+saveUsers(users);
+renderSchedule();
+
+toast("تمت إضافة الحصة.");
+
+}
+
+function updateSchedule(index,key,value){
+
+let users=getUsers();
+let username=localStorage.getItem("BAC_CURRENT_USER");
+
+users[username].schedule[index][key]=value;
+
+saveUsers(users);
+
+}
+
+function deleteSchedule(index){
+
+let users=getUsers();
+let username=localStorage.getItem("BAC_CURRENT_USER");
+
+users[username].schedule.splice(index,1);
+
+saveUsers(users);
+renderSchedule();
+
+}
+
+
+/* =====================================================
+   GOALS
+===================================================== */
+
+function addGoal(){
+
+let text=document.getElementById("goalText").value.trim();
+let date=document.getElementById("goalDate").value;
+
+if(!text){
+toast("اكتب الهدف أولاً.");
+return;
+}
+
+let users=getUsers();
+let username=localStorage.getItem("BAC_CURRENT_USER");
+
+users[username].goals.push({
+text:text,
+date:date,
+done:false
+});
+
+saveUsers(users);
+
+document.getElementById("goalText").value="";
+document.getElementById("goalDate").value="";
+
+renderGoals();
+
+toast("تمت إضافة الهدف 🎯");
+
+}
+
+function renderGoals(){
+
+let user=currentUser().data;
+let container=document.getElementById("goalsContainer");
+
+container.innerHTML="";
+
+user.goals.forEach((goal,index)=>{
+
+container.innerHTML+=`
+
+<div class="goal ${goal.done?'done':''}">
+
+<input
+type="checkbox"
+${goal.done?'checked':''}
+onchange="toggleGoal(${index})">
+
+<div class="goal-text">
+
+<strong>${escapeHTML(goal.text)}</strong>
+
+<small>
+${goal.date?"📅 "+goal.date:"هدف بدون تاريخ"}
+</small>
+
+</div>
+
+<button class="delete"
+onclick="deleteGoal(${index})">
+حذف
+</button>
+
+</div>
+
+`;
+
+});
+
+updateGoalProgress();
+
+}
+
+function toggleGoal(index){
+
+let users=getUsers();
+let username=localStorage.getItem("BAC_CURRENT_USER");
+
+users[username].goals[index].done=
+!users[username].goals[index].done;
+
+saveUsers(users);
+renderGoals();
+
+}
+
+function deleteGoal(index){
+
+let users=getUsers();
+let username=localStorage.getItem("BAC_CURRENT_USER");
+
+users[username].goals.splice(index,1);
+
+saveUsers(users);
+renderGoals();
+
+}
+
+function updateGoalProgress(){
+
+let goals=currentUser().data.goals;
+
+let percent=0;
+
+if(goals.length){
+
+let done=goals.filter(x=>x.done).length;
+
+percent=Math.round(done/goals.length*100);
+
+}
+
+document.getElementById("statGoals").textContent=
+percent+"%";
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function saveProfile(){
+
+let branch=document.getElementById("profileBranch").value;
+
+let users=getUsers();
+let username=localStorage.getItem("BAC_CURRENT_USER");
+
+users[username].branch=branch;
+
+saveUsers(users);
+
+updateUserUI();
+renderSubjects();
+renderGrades();
+renderCareers();
+
+toast("تم حفظ بياناتك ✓");
+
+}
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+const bacDate=
+new Date("2027-06-06T08:00:00+01:00");
+
+function countdownHTML(){
+
+let diff=bacDate-new Date();
+
+if(diff<=0){
+
+return`
+<div class="time-box">
+<strong>0</strong>
+<span>يوم</span>
+</div>`;
+
+}
+
+let days=Math.floor(diff/86400000);
+
+let hours=Math.floor(
+(diff%86400000)/3600000
+);
+
+let minutes=Math.floor(
+(diff%3600000)/60000
+);
+
+let seconds=Math.floor(
+(diff%60000)/1000
+);
+
+return`
+
+<div class="time-box">
+<strong>${days}</strong>
+<span>يوم</span>
+</div>
+
+<div class="time-box">
+<strong>${hours}</strong>
+<span>ساعة</span>
+</div>
+
+<div class="time-box">
+<strong>${minutes}</strong>
+<span>دقيقة</span>
+</div>
+
+<div class="time-box">
+<strong>${seconds}</strong>
+<span>ثانية</span>
+</div>
+
+`;
+
+}
+
+function updateCountdown(){
+
+let html=countdownHTML();
+
+document.getElementById("homeCountdown")
+.innerHTML=html;
+
+document.getElementById("mainCountdown")
+.innerHTML=html;
+
+}
+
+setInterval(updateCountdown,1000);
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function toast(message){
+
+let box=document.getElementById("toast");
+
+box.textContent=message;
+box.classList.add("show");
+
+setTimeout(()=>{
+box.classList.remove("show");
+},2500);
+
+}
+
+function escapeHTML(text){
+
+return String(text)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+window.addEventListener("load",()=>{
+
+let current=
+localStorage.getItem("BAC_CURRENT_USER");
+
+if(current&&currentUser()){
+loadApp();
+}
+
+});
+
+</script>
+
+</body>
+</html>
